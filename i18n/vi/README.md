@@ -4,9 +4,9 @@
 
 ## Dùng trong 5 bước
 
-1. **Giải nén** ZIP, giữ nguyên folder `universal-agent-memory/`.
+1. **Giải nén** ZIP hoặc chạy script cài đặt (`install.sh` / `install.ps1` với `--lang vi`), giữ nguyên folder `universal-agent-memory/`.
 2. **Cài Skill** vào thư mục host đọc: Claude `~/.claude/skills/`; Codex + Gemini CLI `~/.agents/skills/`; Antigravity `~/.gemini/config/skills/`.
-3. **Ghép Global Rules** từ `rules/` vào file hướng dẫn global của AI (không ghi đè nội dung cũ).
+3. **Ghép Global Rules** từ `rules/` vào file hướng dẫn global của AI (tạo backup trước khi ghép, không ghi đè nội dung cũ).
 4. **Chọn kho memory canonical** cho workspace/chủ đề; nếu đã có bộ nhớ, dùng kho đó. Chỉ khởi tạo kho mới khi được phép.
 5. **Mở phiên mới và kiểm 4 lớp:** Rules đọc? Skill nạp? Memory truy cập? Lưu/đọc lại đã được kiểm?
 
@@ -16,7 +16,7 @@
 
 `Global Rules (startup anchor)` → `Skill (hướng dẫn AI)` → `Memory (dữ liệu thật)`.
 
-**Checkpoint** là hành vi của Skill khi làm việc có tiến độ: ghi sau mốc quan trọng, để phiên mới có thể tiếp tục nếu cuộc chat trước kết thúc bất ngờ.
+**Checkpoint** là hành vi của Skill khi làm việc có tiến độ: ghi sau mốc quan trọng, để phiên mới có thể giảm thiểu mất mát trạng thái đã lưu nếu cuộc chat trước kết thúc bất ngờ.
 
 ## Cấu trúc
 
@@ -26,7 +26,7 @@ universal-agent-memory/
 ├── HDSD.md                          # Hướng dẫn người dùng
 ├── README.md
 ├── RELEASE-NOTES.md
-├── TEST-CASES.md                    # Ca kiểm thử, không phải đã pass runtime
+├── TEST-CASES.md                    # 28 kịch bản nghiệm thu được thiết kế
 ├── rules/                            # Global Rules cho từng nền tảng
 │   ├── README.md
 │   ├── claude-code.md
@@ -56,4 +56,4 @@ universal-agent-memory/
 
 Global Rules/Skill là **chỉ dẫn**, không phải một hệ thống cưỡng chế kỹ thuật. Skill không nạp vào phiên khi host không hỗ trợ hoặc không cấp quyền; không thể tự lưu nếu không có filesystem/kho kết nối. Không có đồng bộ ngầm giữa máy/tài khoản/cloud và không phát hiện mọi sự cố bất ngờ.
 
-**Nguồn thiết kế:** khái quát từ kho bộ nhớ đa AI thực chiến (`1.400+` tệp) và so sánh các dự án agent memory/learning/handoff công khai, hoàn toàn độc lập với mọi nghiệp vụ chuyên ngành.
+**Nguồn thiết kế:** khái quát từ kho dự án đa AI thực chiến (~1.400 tệp dự án và hồ sơ vận hành, trong đó có hơn 110 thẻ memory nguyên tử) và so sánh các dự án agent memory/learning/handoff công khai, hoàn toàn độc lập với mọi nghiệp vụ chuyên ngành.

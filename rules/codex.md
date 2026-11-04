@@ -2,7 +2,7 @@
 
 <!-- UAM-V3:BEGIN -->
 ## Universal Agent Memory v3 — Persistent Working Discipline
-- For multi-step or stateful work across sessions: activate/load Skill `universal-agent-memory` from `~/.agents/skills/universal-agent-memory/SKILL.md` or `~/.codex/skills/universal-agent-memory/SKILL.md` (via host skill activation or direct file read if permitted).
+- For multi-step or stateful work across sessions: activate/load Skill `universal-agent-memory` from `~/.agents/skills/universal-agent-memory/SKILL.md` (via host skill activation or direct file read if permitted).
 - Before acting: read workspace instructions (`AGENTS.md`), `memory/MEMORY.md` (or the configured canonical store), and the latest handoff/checkpoint; verify sources and scope. If no memory store exists, DO NOT spawn a parallel store unprompted.
 - During long tasks: update a checkpoint after verified milestones, key decisions, or before handoff/risky steps—do not wait until session end. Strictly separate `VERIFIED`, `COMPLETED_UNVERIFIED`, `PENDING`, and `ASSUMPTION`.
 - At close of substantive work: update durable memory cards, index, and changelog/handoff when valuable; verify persistence. Do not create files for trivial one-off questions (`LIGHT` mode).

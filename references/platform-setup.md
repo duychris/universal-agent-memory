@@ -4,14 +4,15 @@ These paths reflect official documentation for Claude Code, OpenAI Codex, Gemini
 
 ## 1. Recommended Installation Locations
 
-| Environment | Workspace / Project Scope | Personal / Global Scope |
+| Environment | Workspace / Project Scope | Personal / Global Scope (Canonical) |
 |---|---|---|
 | **Claude Code** | `.claude/skills/universal-agent-memory/SKILL.md` | `~/.claude/skills/universal-agent-memory/SKILL.md` |
-| **OpenAI Codex** | `.agents/skills/universal-agent-memory/SKILL.md` | `~/.agents/skills/universal-agent-memory/SKILL.md` *(and `~/.codex/skills/`)* |
-| **Gemini CLI** | `.gemini/skills/universal-agent-memory/SKILL.md` or `.agents/skills/universal-agent-memory/SKILL.md` | `~/.agents/skills/universal-agent-memory/SKILL.md` or `~/.gemini/skills/universal-agent-memory/SKILL.md` |
+| **OpenAI Codex** | `.agents/skills/universal-agent-memory/SKILL.md` | `~/.agents/skills/universal-agent-memory/SKILL.md` |
+| **Gemini CLI** | `.gemini/skills/universal-agent-memory/SKILL.md` or `.agents/skills/universal-agent-memory/SKILL.md` | `~/.agents/skills/universal-agent-memory/SKILL.md` *(shared with Codex)* |
 | **Google Antigravity** | `.agents/skills/universal-agent-memory/SKILL.md` | `~/.gemini/config/skills/universal-agent-memory/SKILL.md` |
 
-Keep the entire skill directory (`SKILL.md`, `references/`, `rules/`, `templates/`) intact.
+- Keep the entire skill directory (`SKILL.md`, `README.md`, `HDSD.md`, `RELEASE-NOTES.md`, `TEST-CASES.md`, `LICENSE`, `references/`, `rules/`, `templates/`, `examples/`) intact.
+- **Avoid Duplicate Skill Detection in Codex:** Install Codex's personal skill only in `~/.agents/skills/universal-agent-memory/`. Do not place a second copy in `~/.codex/skills/universal-agent-memory/`, as having both can cause duplicate skill entries in Codex.
 
 ---
 

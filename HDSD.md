@@ -11,12 +11,29 @@
 
 > Skill không phải bộ nhớ tự động của hãng AI. Nếu agent không đọc được nơi lưu memory, nó **không thể nhớ xuyên phiên** dù cài Skill thành công.
 
-## 2. Tải ZIP và giải nén
+## 2. Tải ZIP giải nén hoặc dùng bộ cài tự động
 
-Giải nén `universal-agent-memory-v3.zip`. Bên trong có **một folder tên `universal-agent-memory`**. Không đổi tên `SKILL.md` hoặc bốc riêng file đó ra; giữ cả `references`, `rules`, `templates`.
+### Cách A: Tải ZIP và giải nén thủ công
+Giải nén `universal-agent-memory-v3.zip`. Bên trong có **một folder tên `universal-agent-memory`**. Không đổi tên `SKILL.md` hoặc bốc riêng file đó ra; giữ cả `references`, `rules`, `templates`, `examples`, `README.md`, `HDSD.md`.
 
 **Mẹo cho Mac:** Trong Finder, bấm `Cmd + Shift + G` và dán đường dẫn có `~` để đến các thư mục ẩn.
 **Windows:** Dán đường dẫn `%USERPROFILE%\...` vào thanh địa chỉ File Explorer.
+
+### Cách B: Dùng script cài đặt có kiểm tra trước (`install.sh` / `install.ps1`)
+> **Lưu ý an toàn:** Không nên chạy trực tiếp mã từ nhánh `main` nếu chưa kiểm tra. Hãy tải script từ tag cố định `v3.0.0`, xem trước bằng `--dry-run`, và có thể chọn đúng nền tảng đang dùng qua `--platform` (`all`, `claude`, `codex`, `gemini`, `antigravity`). Bộ cài tự động tạo file backup cho Global Rules và các file Skill đã sửa trước khi cập nhật, đồng thời giữ nguyên mọi file riêng của bạn trong thư mục Skill.
+
+- **Trên macOS / Linux:**
+  ```bash
+  curl -fsSLO https://raw.githubusercontent.com/duychris/universal-agent-memory/v3.0.0/install.sh
+  bash install.sh --ref v3.0.0 --lang vi --platform all --dry-run
+  bash install.sh --ref v3.0.0 --lang vi --platform all
+  ```
+- **Trên Windows PowerShell:**
+  ```powershell
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/duychris/universal-agent-memory/v3.0.0/install.ps1" -OutFile "install.ps1"
+  .\install.ps1 -Ref v3.0.0 -Lang vi -Platform all -DryRun
+  .\install.ps1 -Ref v3.0.0 -Lang vi -Platform all
+  ```
 
 ## 3. Cài Skill — chọn AI đang dùng
 
@@ -29,7 +46,7 @@ Giải nén `universal-agent-memory-v3.zip`. Bên trong có **một folder tên 
 
 Sau khi đặt vào, tệp phải ở dạng `.../skills/universal-agent-memory/SKILL.md`. Không tạo nhầm hai cấp `universal-agent-memory/universal-agent-memory/`.
 
-**Dùng nhiều AI:** Mac có thể copy folder sang 3 chỗ (`~/.agents/skills`, `~/.claude/skills`, `~/.gemini/config/skills`); **Codex và Gemini CLI có thể dùng chung bản đầu**. Nếu dùng symlink, chỉ làm khi biết cách kiểm tra; copy là dễ nhất và phải cập nhật các bản khi nâng cấp.
+**Dùng nhiều AI:** Mac có thể copy folder sang 3 chỗ (`~/.agents/skills`, `~/.claude/skills`, `~/.gemini/config/skills`); **Codex và Gemini CLI có thể dùng chung bản đầu**. Không cài thêm bản thứ hai vào `~/.codex/skills/universal-agent-memory` để tránh trùng nhận diện Skill trên Codex. Nếu dùng symlink, chỉ làm khi biết cách kiểm tra; copy là dễ nhất và phải cập nhật các bản khi nâng cấp.
 
 **Cloud, web hoặc sandbox:** Skill trên ổ cứng Mac không tự xuất hiện ở cloud. Cần cài/upload ở môi trường đó theo cách được nền tảng hỗ trợ. Không kỳ vọng ChatGPT chat thông thường tự đọc file `~/.agents/skills`.
 
@@ -52,7 +69,7 @@ Chỉ đặt Skill vào folder **chưa đủ**. Đọc [rules/README.md](rules/R
 
 **Không muốn sửa tay?** Đưa folder ZIP đã giải nén cho Codex/Claude có quyền truy cập file local và dán câu này:
 
-> Đọc HDSD.md và rules/README.md của bộ Universal Agent Memory v3 tôi vừa cung cấp. Hãy cài SKILL.md và các file đi kèm ở phạm vi user cho các agent đang có trên máy. Ghép đoạn UAM-V3 vào Global Rules đang tồn tại (không ghi đè, không tạo đoạn trùng). Nếu có Gemini CLI và Antigravity cùng đọc GEMINI.md thì chỉ neo một lần. Trước khi sửa, liệt kê vị trí và các file sẽ tác động; chỉ thao tác khi có quyền. Kiểm tra Skill được tìm thấy, Rules đã đọc và bộ nhớ canonical có thể đọc; báo trạng thái từng lớp, không nói đã đồng bộ nếu chưa kiểm. Không thay đổi project code, xóa dữ liệu hoặc cài dịch vụ ngoài phạm vi yêu cầu.
+> Đọc HDSD.md và rules/README.md của bộ Universal Agent Memory v3 tôi vừa cung cấp. Hãy cài SKILL.md và các file đi kèm ở phạm vi user cho các agent đang có trên máy. Tạo backup trước khi ghép đoạn UAM-V3 vào Global Rules đang tồn tại (không ghi đè, không tạo đoạn trùng). Nếu có Gemini CLI và Antigravity cùng đọc GEMINI.md thì chỉ neo một lần. Trước khi sửa, liệt kê vị trí và các file sẽ tác động; chỉ thao tác khi có quyền. Kiểm tra Skill được tìm thấy, Rules đã đọc và bộ nhớ canonical có thể đọc; báo trạng thái từng lớp, không nói đã đồng bộ nếu chưa kiểm. Không thay đổi project code, xóa dữ liệu hoặc cài dịch vụ ngoài phạm vi yêu cầu.
 
 ## 5. Memory thực sự nằm ở đâu?
 
@@ -111,7 +128,7 @@ Kết quả cần có bằng chứng tách biệt. Nếu agent chưa được ph
 | Phiên sau không nhớ | Chưa ghi file, kho canonical sai, checkpoint chưa persisted, hoặc phiên sau không đọc kho đó |
 | Hai AI nhớ khác nhau | Quyền đọc/ghi khác, hai bản local không sync, symlink lỗi, chưa fetch hoặc nguồn có xung đột |
 | Memory phình to | Dùng LIGHT cho việc nhỏ, chỉ ghi bài học bền vững; cập nhật thẻ cũ, không tạo trùng |
-| Mất quota hoặc crash trước cuối phiên | Checkpoint sau mốc quan trọng giảm mất mát nhưng **không đảm bảo** cứu mọi công việc chưa lưu |
+| Mất quota hoặc crash trước cuối phiên | Checkpoint sau mốc quan trọng giảm mất mát trạng thái đã lưu nhưng **không đảm bảo** cứu mọi công việc chưa kịp ghi ra file |
 | Gemini + Antigravity nhắc quy tắc hai lần | Gỡ **chỉ khối UAM trùng** ở một file global sau khi đã kiểm tra nguồn được nạp, giữ các quy tắc khác |
 | Agent nói đã sync nhưng không chỉ ra bằng chứng | Trạng thái thực tế là `UNKNOWN` hoặc `SYNC_PENDING`; xác minh ở kho đích |
 
